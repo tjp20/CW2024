@@ -1,4 +1,6 @@
-package com.example.demo;
+package com.example.demo.User;
+
+import com.example.demo.Actor.Projectile;
 
 public class UserProjectile extends Projectile {
 
