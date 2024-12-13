@@ -4,10 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-2`
+
 public class Main extends Application {
 
-	"?:>lkjhgfdsa"
 	private static final int SCREEN_WIDTH = 1300;
 	private static final int SCREEN_HEIGHT = 750;
 	private static final String TITLE = "Sky Battle";
@@ -26,5 +25,5 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch();
-	}\[poiiu7yu6y543231`]	qwegtfyhujikolp;[']
-			\']}
+	}
+}

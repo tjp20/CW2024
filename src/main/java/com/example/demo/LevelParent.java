@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.example.demo.controller.Controller;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -29,7 +30,7 @@ public abstract class LevelParent extends Observable {
 	private final List<ActiveActorDestructible> enemyUnits;
 	private final List<ActiveActorDestructible> userProjectiles;
 	private final List<ActiveActorDestructible> enemyProjectiles;
-	
+
 	private int currentNumberOfEnemies;
 	private LevelView levelView;
 
@@ -42,6 +43,7 @@ public abstract class LevelParent extends Observable {
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
+
 
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
 		this.screenHeight = screenHeight;
@@ -57,14 +59,17 @@ public abstract class LevelParent extends Observable {
 
 	protected abstract void checkIfGameOver();
 
+
 	protected abstract void spawnEnemyUnits();
 
 	protected abstract LevelView instantiateLevelView();
 
 	public Scene initializeScene() {
+		root.getChildren().clear();
 		initializeBackground();
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay();
+		background.requestFocus();
 		return scene;
 	}
 
@@ -73,6 +78,11 @@ public abstract class LevelParent extends Observable {
 		timeline.play();
 	}
 
+	public void stopGame() {
+		if (timeline != null && timeline.getStatus() == Animation.Status.RUNNING) {
+			timeline.stop();
+		}
+	}
 	public void goToNextLevel(String levelName) {
 		setChanged();
 		notifyObservers(levelName);
@@ -171,7 +181,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void handleCollisions(List<ActiveActorDestructible> actors1,
-			List<ActiveActorDestructible> actors2) {
+								  List<ActiveActorDestructible> actors2) {
 		for (ActiveActorDestructible actor : actors2) {
 			for (ActiveActorDestructible otherActor : actors1) {
 				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
@@ -249,3 +259,5 @@ public abstract class LevelParent extends Observable {
 	}
 
 }
+
+
